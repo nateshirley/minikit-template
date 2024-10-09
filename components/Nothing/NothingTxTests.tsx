@@ -6,10 +6,7 @@ import {
   SendTransactionInput,
 } from "@worldcoin/minikit-js";
 import { useEffect } from "react";
-import { Abi } from "viem";
-import NOTHING_ABI_JSON from "./Nothing.json";
-const NOTHING_ABI = NOTHING_ABI_JSON.abi as Abi;
-const NOTHING_ADDRESS = "0x8B6B419b4Ad7b078245091f210dE5ae848347301";
+import { NOTHING_ABI, NOTHING_ADDRESS } from "./nothingConstants";
 
 // minikit validates the txn but returns user_rejected before successfully simulating
 // txn runs in script env with viem
@@ -38,7 +35,24 @@ const stringInputExampleTxPayload: SendTransactionInput = {
   ],
 };
 
-export default function SendTxTest() {
+// validation error
+const structInputExampleTxPayload: SendTransactionInput = {
+  transaction: [
+    {
+      address: NOTHING_ADDRESS,
+      abi: NOTHING_ABI,
+      functionName: "acceptStruct",
+      args: [
+        {
+          a: BigInt(1),
+          b: BigInt(2),
+        },
+      ],
+    },
+  ],
+};
+
+export default function NothingTxTests() {
   function sendTx() {
     MiniKit.commands.sendTransaction(integerInputExampleTxPayload);
   }
@@ -67,12 +81,12 @@ export default function SendTxTest() {
   return (
     <div>
       <button
-        className="h-12 w-32 bg-600"
+        className="border border-gray-400 p-4"
         onClick={() => {
           sendTx();
         }}
       >
-        Send Tx
+        Test Send Tx
       </button>
     </div>
   );
