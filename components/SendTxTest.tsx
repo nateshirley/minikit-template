@@ -13,6 +13,7 @@ const NOTHING_ADDRESS = "0x8B6B419b4Ad7b078245091f210dE5ae848347301";
 
 // minikit validates the txn but returns user_rejected before successfully simulating
 // txn runs in script env with viem
+// example script at ./nothingScript.ts
 const integerInputExampleTxPayload: SendTransactionInput = {
   transaction: [
     {
