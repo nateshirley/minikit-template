@@ -5,7 +5,10 @@ import {
   ResponseEvent,
   SendTransactionInput,
 } from "@worldcoin/minikit-js";
-import { useEffect } from "react";
+import { useWaitForTransactionReceipt } from "@worldcoin/minikit-react";
+import { useEffect, useState } from "react";
+import { createPublicClient, http } from "viem";
+import { worldchain } from "viem/chains";
 import { NOTHING_ABI, NOTHING_ADDRESS } from "./nothingConstants";
 
 // minikit validates the txn but returns user_rejected before successfully simulating
@@ -54,8 +57,30 @@ const structInputExampleTxPayload: SendTransactionInput = {
 
 export default function NothingTxTests() {
   function sendTx() {
-    MiniKit.commands.sendTransaction(integerInputExampleTxPayload);
+    MiniKit.commands.sendTransaction(stringInputExampleTxPayload);
   }
+  const [transactionId, setTransactionId] = useState<string>("");
+
+  const client = createPublicClient({
+    chain: worldchain,
+    // Choose your own RPC optionally
+    transport: http("https://worldchain-mainnet.g.alchemy.com/public"),
+  });
+
+  const { isLoading: isConfirming, isSuccess: isConfirmed } =
+    useWaitForTransactionReceipt({
+      client: client,
+      appConfig: {
+        app_id: "app_0844e90773d1ec26c4d47e111879f4c4",
+      },
+      transactionId: transactionId,
+    });
+
+  // console.log("isConfirming", isConfirming);
+  // console.log("isConfirmed", isConfirmed);
+  // https://developer.worldcoin.org/api/v2/minikit/transaction/0x58c3ee7b8567a05115b5822fc25fb74e9bbaf81e686af6ea9effd7e961a5008a?app_id=app_0844e90773d1ec26c4d47e111879f4c4&type=transaction
+  // 0x58c3ee7b8567a05115b5822fc25fb74e9bbaf81e686af6ea9effd7e961a5008a
+
 
   useEffect(() => {
     if (!MiniKit.isInstalled()) {
@@ -81,12 +106,12 @@ export default function NothingTxTests() {
   return (
     <div>
       <button
-        className="border border-gray-400 p-4"
+        className="border border-gray-400 p-4 text-red-500"
         onClick={() => {
           sendTx();
         }}
       >
-        Test Send Tx
+        Test Send Tx!
       </button>
     </div>
   );

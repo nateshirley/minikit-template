@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@worldcoin/minikit-js": "0.0.38-internal-alpha",
+    "@worldcoin/minikit-react": "0.0.38-internal-alpha",
     "eruda": "^3.2.3",
     "next": "14.2.6",
     "next-auth": "^4.24.7",
