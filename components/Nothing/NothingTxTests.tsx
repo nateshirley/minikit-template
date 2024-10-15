@@ -11,9 +11,6 @@ import { createPublicClient, http } from "viem";
 import { worldchain } from "viem/chains";
 import { NOTHING_ABI, NOTHING_ADDRESS } from "./nothingConstants";
 
-// minikit validates the txn but returns user_rejected before successfully simulating
-// txn runs in script env with viem
-// example script at ./nothingScript.ts
 const integerInputExampleTxPayload: SendTransactionInput = {
   transaction: [
     {
@@ -25,8 +22,6 @@ const integerInputExampleTxPayload: SendTransactionInput = {
   ],
 };
 
-// with single string input arg, the transaction won't validate
-// same as with a txn that takes no inputs
 const stringInputExampleTxPayload: SendTransactionInput = {
   transaction: [
     {
@@ -38,7 +33,6 @@ const stringInputExampleTxPayload: SendTransactionInput = {
   ],
 };
 
-// validation error
 const structInputExampleTxPayload: SendTransactionInput = {
   transaction: [
     {
