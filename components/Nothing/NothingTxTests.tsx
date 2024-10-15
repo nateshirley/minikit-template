@@ -17,7 +17,7 @@ const integerInputExampleTxPayload: SendTransactionInput = {
       address: NOTHING_ADDRESS,
       abi: NOTHING_ABI,
       functionName: "changeCounter",
-      args: [BigInt(1)],
+      args: ["1"],
     },
   ],
 };
@@ -41,8 +41,8 @@ const structInputExampleTxPayload: SendTransactionInput = {
       functionName: "acceptStruct",
       args: [
         {
-          a: BigInt(1),
-          b: BigInt(2),
+          a: "1",
+          b: "2",
         },
       ],
     },
@@ -72,7 +72,7 @@ export default function NothingTxTests() {
 
   // console.log("isConfirming", isConfirming);
   // console.log("isConfirmed", isConfirmed);
-  // https://developer.worldcoin.org/api/v2/minikit/transaction/0x58c3ee7b8567a05115b5822fc25fb74e9bbaf81e686af6ea9effd7e961a5008a?app_id=app_0844e90773d1ec26c4d47e111879f4c4&type=transaction
+  // https://developer.worldcoin.org/api/v2/minikit/transaction/0x4c535df3a0911f5afa1b073a2c139635353341178e5a43154532bbd5f0fb3685?app_id=app_0844e90773d1ec26c4d47e111879f4c4&type=transaction
   // 0x58c3ee7b8567a05115b5822fc25fb74e9bbaf81e686af6ea9effd7e961a5008a
 
 
